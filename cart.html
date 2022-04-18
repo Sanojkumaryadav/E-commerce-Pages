@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <style>
+        #checkout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .box{
+            /* border: 2px solid red; */
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+    <div id="checkout"></div>
+    
+</body>
+
+
+<script>
+ var cartData = JSON.parse(localStorage.getItem('cartData'));
+
+var totalSum = cartData.reduce(function(sum, ele, index, arr) {
+    return sum + Number(ele.price);
+}, 0);
+var totalItems = cartData.length;
+document.querySelector('p').innerText = 'You have ' + " " + totalItems + " " + "items" + " "+ "in your cart and total is: " + totalSum; 
+cartData.forEach((cartItem, cartIndex) => {
+    var box = document.createElement('div');
+    box.setAttribute('class', 'box')
+
+    var img = document.createElement('img');
+    img.src = cartItem.image_url;
+
+
+    var name = document.createElement('p');
+    name.textContent = cartItem.name;
+
+    var price = document.createElement('p');
+    price.innerText = cartItem.price;
+
+    var cartButton = document.createElement('button');
+    cartButton.innerText = 'Remove from cart';
+
+    var promo=document.createElement('input');
+    promo.setAttribute('placeholder',"Enter Promo Code");
+    promo.setAttribute('id','code');
+
+    var apply = document.createElement('button');
+
+    apply.innerText = 'Apply Code';
+
+    cartButton.addEventListener('click', function() {
+       cartData.splice(cartIndex, 1)
+       localStorage.setItem('cartData', JSON.stringify(cartData));
+       window.location.reload();
+    });
+
+    apply.addEventListener('click',function(){
+           let code=document.querySelector('#code').value;
+           if(code!= 12345) {
+               alert("Code Invalid");
+           }else{
+               alert("30% off Apply")
+            var total = cartData.reduce(function(sum, ele, index, arr) {
+    return sum + Number(ele.price);
+}, 0);
+        total=total*0.7;
+        document.querySelector('p').innerText = 'Apply 30% off Now You have ' + " " + totalItems + " " + "items" + " "+ "in your cart and total is" + total; 
+        localStorage.setItem('cartData', JSON.stringify(cartData));
+      
+
+           }
+
+  
+    })
+
+    box.append(img, name, price, cartButton,promo,apply);
+    document.querySelector('#checkout').append(box)
+});
+
+var paybtn=document.createElement('button');
+paybtn.innerHTML="Continue For Payment";
+document.querySelector('body').append(paybtn);
+paybtn.addEventListener('click',function(){
+    window.location.href='payment.html';
+});
+</script>
+
+</html>

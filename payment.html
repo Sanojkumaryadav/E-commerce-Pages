@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 300px;
+            width: 30%;
+            justify-content: space-between;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Enter your payment details</h1>
+        <form>
+            <input type='number' placeholder="Enter your card number" id="cardNumber"/>
+            <input type='text' placeholder="Enter your name" id="name"/>
+            <input type='text' placeholder="Enter your address" id="address"/>
+            <select id="countries">
+                <option>India</option>
+                <option>USA</option>
+                <option>Canada</option>
+                <option>Others</option>
+            </select>
+            <div>
+                <input type='text' placeholder="City" id="City" />
+                <select>
+                    <option>India</option>
+                    <option>USA</option>
+                    <option>Canada</option>
+                    <option>Others</option>
+                </select>
+                <input type='number' placeholder="Zipcode" />
+            </div>
+            <input type="submit" value="Complete Payment" />
+        </form>
+    </div>
+
+    
+</body>
+
+<script>
+
+    document.querySelector('form').addEventListener('submit',function(){
+        event.preventDefault();
+        var cardNumber=document.querySelector('#cardNumber').value;
+        if(cardNumber && cardNumber.length==16){
+            alert("Verify OTP");
+            window.location.href='otp.html';
+        }else{
+            alert("Invalid Card Number");
+            window.location.reload();
+        }
+    })
+</script>
+</html>

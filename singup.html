@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          #navBar{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: slategray;
+        }
+        #navBar a:hover{
+            color: white;
+        }
+        a{
+            text-decoration: none;
+        }
+        #container{
+            /* border: 1px solid red; */
+            text-align: center;
+            width: 20%;
+            margin: auto;
+        }
+        input{
+            margin: 20px;
+            padding: 15px;
+        }
+        #continue{
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="navBar">
+        <div><a href="men.html">Man</a></div>
+        <div><a href="women.html">Women</a></div>
+        <div><a href="singup.html">Singup</a></div>
+        <div><a href="./login.html">Login</a></div>
+    </div>
+    <div id="container">
+        <h1>Create Account</h1>
+        <form>
+            <label for="name">Your Name</label><br>
+            <input type="text" id="name" ><br>
+            <label for="phone">Mobile Number</label><br>
+            <input type="number" id="phone" ><br>
+            <label for="email">Email(optional)</label><br>
+            <input type="email" id="email" ><br>
+            <label for="password">At least 6 characters</label><br>
+            <input type="password" id="password" ><br>
+            <input id="continue" type="submit" value="continue"> <br>
+            <a href="login.html" target="_blank"> Go to Login</a>
+
+        </form>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit',singUpFn);
+
+        var usersData;
+        if(localStorage.getItem('usersData') === null){
+            usersData = [];
+        }else{
+            usersData = JSON.parse(localStorage.getItem('usersData'));
+        }
+
+        function singUpFn(){
+            event.preventDefault();
+            var userObj = {
+                name: document.querySelector('#name').value,
+                phone: document.querySelector('#phone').value,
+                email: document.querySelector('#email').value,
+                password: document.querySelector('#password').value,
+            }
+            usersData.push(userObj);
+            localStorage.setItem('usersData', JSON.stringify(usersData));
+            alert('Singup Seccessfully')
+        } 
+        
+    </script>
+</body>
+</html>

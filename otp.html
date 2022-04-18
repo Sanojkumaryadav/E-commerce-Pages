@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <style>
+        #container{
+
+            width: 200px;
+            margin: auto;
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+      <form >
+        <h1>Verify OTP</h1>
+        <input id="otp" type="number" placeholder="Enter OTP">
+        <button id="sub">Verify</button>
+      </form>
+    </div>
+   
+
+    
+</body>
+<script>
+    document.querySelector('#sub').addEventListener('click',function(){
+        event.preventDefault();
+       
+        var otp=document.querySelector('#otp').value;
+        if(otp==1234){
+            alert("Payment Sucess");
+            window.location.href='index.html';
+        }else{
+            alert("OTP Wrong Please Enter Again");
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          #navBar{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: slategray;
+        }
+        #navBar a:hover{
+            color: white;
+        }
+        a{
+            text-decoration: none;
+        }
+        form{
+            display: grid;
+            width: 15%;
+            margin: auto;
+            margin-top: 100px;
+        }
+        input{
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="navBar">
+        <div><a href="men.html">Man</a></div>
+        <div><a href="women.html">Women</a></div>
+        <div><a href="singup.html">Singup</a></div>
+        <div><a href="./login.html">Login</a></div>
+    </div>
+    <form>
+        <input type="email" id="email" placeholder="Enter email"/>
+        <input type="password" id="password" placeholder="Enter password"/>
+        <input type="submit"/>
+    
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', loginFn);
+
+        var registeredUsers = JSON.parse(localStorage.getItem('usersData'));
+        function loginFn(){
+            event.preventDefault();
+            var enteredEmail = document.querySelector('#email').value;
+            var enteredPassword = document.querySelector('#password').value;
+
+            registeredUsers.forEach(userData => {
+                if(userData.email === enteredEmail && userData.password === enteredPassword){
+                    alert("LOGIN SUCCESS");
+                    window.location.href = "men.html"; 
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
